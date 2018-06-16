@@ -1,0 +1,60 @@
+clear
+clc
+%this program prodicts the games of the world cup round robin bracket using
+%the ranks of the teams and coinflips
+disp('Use just the first letter of the team name')
+team(1)=input('Write the team name ranked 1st: ','s');
+team(2)=input('Write the team name ranked 2nd: ','s');
+team(3)=input('Write the team name ranked 3rd: ','s');
+team(4)=input('Write the team name ranked 4th: ','s');
+rank(1)=1;
+rank(2)=2;
+rank(3)=3;
+rank(4)=4;
+win(1)=0;
+win(2)=0;
+win(3)=0;
+win(4)=0;
+lose(1)=0;
+lose(2)=0;
+lose(3)=0;
+lose(4)=0;
+match=0;
+flips=randi([1,2],[6,7]);
+for i=1:4
+   for j=i:4
+   wincounti=0;
+   wincountj=0;
+   losecounti=0;
+   losecountj=0;
+if i~=j
+    match=match+1;
+    ranksum=rank(i)+rank(j);
+    countheads=0;
+    counttails=0;
+for k=1:ranksum
+    if flips(match,k)==1
+        countheads=countheads+1;
+    else 
+        counttails=counttails+1;
+    end
+    if countheads>=rank(i)
+        win1=1;
+    elseif counttails==rank(j) && countheads<rank(i)        
+        win1=0;
+    else
+    end
+end
+if win1==1
+    win(i)=win(i)+1;
+    lose(j)=lose(j)+1;
+else
+    win(j)=win(j)+1;
+    lose(i)=lose(i)+1;
+end
+end
+   end
+end
+fprintf('Teams   %s \t%s \t%s \t%s \n',team(1),team(2),team(3),team(4))
+fprintf('Wins    %d \t%d \t%d \t%d \n',win(1),win(2),win(3),win(4))
+fprintf('Losses  %d \t%d \t%d \t%d \n',lose(1),lose(2),lose(3),lose(4))
